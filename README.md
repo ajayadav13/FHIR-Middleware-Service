@@ -9,16 +9,6 @@ A secure Ktor middleware that manages local user authentication and delegates cl
 - Ktor HTML DSL (server-side rendered pages)
 - Docker + Docker Compose (multi-stage build, containerized deployment)
 
-## High-Level Architecture
-
-```mermaid
-graph TD
-    U[User Browser] -->|HTML forms & cookies| Ktor[Ktor Server]
-    Ktor -->|Sessions (cookie)| U
-    Ktor -->|Exposed/Hikari| DB[(PostgreSQL in Docker)]
-    Ktor -->|HAPI FHIR Client| FHIR[(Public HAPI FHIR R4)]
-    Ktor -->|Swagger UI| Docs[API Docs /swagger]
-```
 
 ### Data Flows (key journeys)
 
@@ -308,6 +298,3 @@ Before deploying to production:
 - Sessions are cookie-based; passwords are hashed with BCrypt before storage.
 - The Docker image uses Alpine Linux and OpenJDK 21 JRE for minimal footprint.
 - Application runs as non-root user `ktor` inside the container for security.
-
-## License
-[Specify your license here]
