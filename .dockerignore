@@ -1,0 +1,55 @@
+# Build artifacts
+build/
+.gradle/
+*.jar
+*.war
+
+# IDE files
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.settings/
+.classpath
+.project
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Documentation
+README.md
+*.md
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker files (not needed in build context)
+Dockerfile
+.dockerignore
+docker-compose.yml
+
+# Test files
+**/test/
+**/*Test.kt
+**/*Spec.kt
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.swp
+*.swo
+*~
+
+# Environment files
+.env
+.env.local
+

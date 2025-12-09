@@ -1,0 +1,77 @@
+openapi: 3.0.3
+info:
+  title: FHIR Middleware Service
+  version: "1.0.0"
+  description: |
+    Ktor-based middleware for session auth and proxying Patient resources to the
+    public HAPI FHIR R4 server.
+servers:
+  - url: http://localhost:8080
+paths:
+  /register:
+    post:
+      summary: Register a user
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "302":
+          description: Redirects to login on success
+  /login:
+    post:
+      summary: Login and create session
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "302":
+          description: Redirects to patient form on success
+  /patient/new:
+    post:
+      summary: Create FHIR patient on public server
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                gender:
+                  type: string
+                  enum: [male, female, other]
+      responses:
+        "200":
+          description: Created patient and shows resource id
+  /patient/{id}:
+    get:
+      summary: Fetch FHIR patient from public server
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Patient JSON
+
